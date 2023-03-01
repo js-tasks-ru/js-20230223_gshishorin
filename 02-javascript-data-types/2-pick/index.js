@@ -6,7 +6,7 @@
  */
 
 export const pick = (obj, ...fields) => {
-  let filterObject = {};
+  const filterObject = {};
   for (let field of fields) {
     if (Object.keys(obj).includes(field)) {
       filterObject[field] = obj[field];

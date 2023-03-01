@@ -5,7 +5,7 @@
  * @returns {object} - returns the new object
  */
 export const omit = (obj, ...fields) => {
-  let filterObject = {};
+  const filterObject = {};
   for (let key of Object.keys(obj)) {
     if (!fields.includes(key)) {
       filterObject[key] = obj[key];
