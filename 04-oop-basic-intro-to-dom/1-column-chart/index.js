@@ -58,8 +58,7 @@ export default class ColumnChart {
           `<div style="--value: ${prop.value}" data-tooltip="${prop.percent}"></div>`
         );
       }
-      columnBody.join("");
-      return columnBody;
+      return columnBody.join('');
     }
   }
 
