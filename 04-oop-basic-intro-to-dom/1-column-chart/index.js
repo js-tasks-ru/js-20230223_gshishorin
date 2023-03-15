@@ -12,6 +12,8 @@ export default class ColumnChart {
     this.label = label;
     this.value = formatHeading(value);
     this.link = link;
+
+    this.render();
   }
 
   get template() {
@@ -33,14 +35,13 @@ export default class ColumnChart {
     `;
   }
 
-  get element() {
+  render() {
     const wrapper = document.createElement("div");
     wrapper.innerHTML = this.template;
-    const _element = wrapper.firstElementChild;
+    this.element = wrapper.firstElementChild;
     if (!this.data.length) {
-      _element.classList.add("column-chart_loading");
+      this.element.classList.add("column-chart_loading");
     }
-    return _element;
   }
 
   getLink() {
@@ -58,7 +59,7 @@ export default class ColumnChart {
           `<div style="--value: ${prop.value}" data-tooltip="${prop.percent}"></div>`
         );
       }
-      return columnBody.join('');
+      return columnBody.join("");
     }
   }
 
