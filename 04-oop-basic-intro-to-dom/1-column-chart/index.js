@@ -28,7 +28,7 @@ export default class ColumnChart {
             this.value
           }</div>
           <div data-element="body" class="column-chart__chart">
-            ${this.getColumnElements()}
+            ${this.getColumnBody()}
           </div>
         </div>
       </div>
@@ -49,30 +49,17 @@ export default class ColumnChart {
       ? `<a class="column-chart__link" href="${this.link}">View all</a>`
       : "";
   }
-
-  getColumnElements() {
-    if (this.data.length > 0) {
-      const columnBody = [];
-      const columnProps = this.getColumnProps(this.data);
-      for (let prop of columnProps) {
-        columnBody.push(
-          `<div style="--value: ${prop.value}" data-tooltip="${prop.percent}"></div>`
-        );
-      }
-      return columnBody.join("");
-    }
-  }
-
-  getColumnProps(data) {
+  getColumnBody(data = this.data) {
     const maxValue = Math.max(...data);
     const scale = 50 / maxValue;
 
-    return data.map((item) => {
-      return {
-        percent: ((item / maxValue) * 100).toFixed(0) + "%",
-        value: String(Math.floor(item * scale)),
-      };
-    });
+    return data
+      .map((item) => {
+        const percent = ((item / maxValue) * 100).toFixed(0) + "%";
+        const value = String(Math.floor(item * scale));
+        return `<div style="--value: ${value}" data-tooltip="${percent}"></div>`;
+      })
+      .join("");
   }
 
   update(data) {
